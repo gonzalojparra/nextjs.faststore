@@ -19,7 +19,7 @@ declare module 'react' {
 
 interface Props extends ImageOptions {
   preload?: boolean
-  fetchPriority?: string
+  fetchPriority?: 'high' | 'low' | 'auto'
 }
 
 // TODO: Replace this component by next/image

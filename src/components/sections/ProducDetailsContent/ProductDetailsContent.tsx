@@ -138,6 +138,9 @@ function ProductDetailsContent({
             cellPadding={0}
             cellSpacing={0}
             className="text__title-mini-alt"
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+            placeholder=""
           >
             <UITableBody>
               <UITableRow>

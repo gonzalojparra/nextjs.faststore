@@ -82,7 +82,12 @@ function ShippingSimulation({
             </p>
           </header>
 
-          <Table data-fs-shipping-simulation-table>
+          <Table
+            data-fs-shipping-simulation-table
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+            placeholder=""
+          >
             <TableBody>
               {shippingOptions.map((option) => (
                 <TableRow
