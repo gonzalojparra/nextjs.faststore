@@ -20,9 +20,10 @@
     "release": "release-it --ci"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "dependencies": {
+    "@babel/core": "^7.26.0",
     "@builder.io/partytown": "^0.6.1",
     "@envelop/core": "^1.2.0",
     "@envelop/graphql-jit": "^1.1.1",
@@ -32,6 +33,7 @@
     "@faststore/graphql-utils": "^1.11.8",
     "@faststore/sdk": "^1.11.8",
     "@faststore/ui": "^1.12.23",
+    "@opentelemetry/api": "^1.9.0",
     "@types/punycode": "^2.1.4",
     "@types/react": "^18.0.14",
     "@vtex/client-cms": "^0.2.12",
