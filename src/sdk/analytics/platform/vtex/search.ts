@@ -77,19 +77,31 @@ type SearchEvent =
       url: string
     }
 
-const sendEvent = (options: SearchEvent & { url?: string }) =>
-  fetch(`https://sp.vtex.com/event-api/v1/${config.api.storeId}/event`, {
-    method: 'POST',
-    body: JSON.stringify({
-      ...options,
-      userAgent: navigator.userAgent,
-      anonymous: user.anonymous(),
-      session: user.session(),
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
+const sendEvent = (options: SearchEvent & { url?: string }) => {
+  try {
+    return fetch(
+      `https://sp.vtex.com/event-api/v1/${config.api.storeId}/event`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          ...options,
+          userAgent: navigator.userAgent,
+          anonymous: user.anonymous(),
+          session: user.session(),
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      }
+    ).catch((error) => {
+      console.warn('Failed to send analytics event:', error)
+    })
+  } catch (error) {
+    console.warn('Error preparing analytics event:', error)
+
+    return Promise.resolve()
+  }
+}
 
 const isFullTextSearch = (url: URL) =>
   typeof url.searchParams.get('q') === 'string' &&

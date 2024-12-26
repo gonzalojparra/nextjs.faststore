@@ -1,6 +1,6 @@
 import { sendAnalyticsEvent } from '@faststore/sdk'
 import { List } from '@faststore/ui'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { ViewCartEvent, CurrencyCode } from '@faststore/sdk'
 
 import Alert from 'src/components/ui/Alert'
@@ -25,6 +25,9 @@ function CartSidebar() {
   const cart = useCart()
   const { cart: displayCart, closeCart } = useUI()
   const { fade, fadeOut } = useFadeEffect()
+  const [showContent, setShowContent] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [compensationAdded, setCompensationAdded] = useState(false)
 
   const { items, gifts, totalItems, isValidating, subTotal, total } = cart
 
@@ -52,6 +55,32 @@ function CartSidebar() {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleAddProduct = async () => {
+    setIsLoading(true)
+    try {
+      const response = await fetch('/api/addCompensation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cartId: cart.id,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to add compensation product')
+      }
+
+      setCompensationAdded(true)
+      setShowContent(false)
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <SlideOver
@@ -92,6 +121,37 @@ function CartSidebar() {
                 <CartItem item={item} />
               </li>
             ))}
+            <div className="ecommitment">
+              {showContent && !compensationAdded && (
+                <>
+                  <p className="ecommitment__text">
+                    ¿Querés compensar tu envío?
+                  </p>
+                  <div className="ecommitment__buttons">
+                    <button
+                      onClick={handleAddProduct}
+                      className="ecommitment__button ecommitment__button--yes"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? 'Agregando...' : 'Sí'}
+                    </button>
+                    <button
+                      onClick={() => setShowContent(false)}
+                      className="ecommitment__button ecommitment__button--no"
+                      disabled={isLoading}
+                    >
+                      No
+                    </button>
+                  </div>
+                </>
+              )}
+              {compensationAdded && (
+                <div className="ecommitment__success">
+                  <Icon name="Check" width={24} height={24} />
+                  <p>¡Compensación agregada!</p>
+                </div>
+              )}
+            </div>
           </List>
 
           {gifts.length > 0 && (
