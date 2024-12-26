@@ -34,11 +34,11 @@ module.exports = {
   },
 
   // Production URLs
-  storeUrl: 'https://nextjs.vtex.app',
-  secureSubdomain: 'https://secure.vtexfaststore.com',
-  checkoutUrl: 'https://secure.vtexfaststore.com/checkout',
-  loginUrl: 'https://secure.vtexfaststore.com/api/io/login',
-  accountUrl: 'https://secure.vtexfaststore.com/api/io/account',
+  storeUrl: 'https://ecommitmentpartnerar.myvtex.com',
+  secureSubdomain: 'https://ecommitmentpartnerar.myvtex.com',
+  checkoutUrl: 'https://ecommitmentpartnerar.myvtex.com/checkout',
+  loginUrl: 'https://ecommitmentpartnerar.myvtex.com/api/io/login',
+  accountUrl: 'https://ecommitmentpartnerar.myvtex.com/api/io/account',
 
   // Lighthouse CI
   lighthouse: {
