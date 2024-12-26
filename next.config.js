@@ -34,6 +34,10 @@ const nextConfig = {
     return config
   },
   distDir: '.next',
+  generateBuildId: async () => {
+    return 'build'
+  },
+  output: 'standalone',
 }
 
 module.exports = nextConfig
