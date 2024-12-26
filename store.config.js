@@ -16,7 +16,7 @@ module.exports = {
   api: {
     storeId: 'ecommitmentpartnerar',
     workspace: 'gonzalojparra',
-    environment: 'Production',
+    environment: 'vtexcommercestable',
     hideUnavailableItems: true,
   },
 
@@ -27,7 +27,7 @@ module.exports = {
       symbol: '$',
     },
     locale: 'en-US',
-    channel: '{"salesChannel":"1","regionId":""}',
+    channel: '{"salesChannel":"1"}',
     country: 'USA',
     postalCode: null,
     person: null,

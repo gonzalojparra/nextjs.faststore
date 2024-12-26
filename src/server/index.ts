@@ -72,34 +72,39 @@ export const execute = async <V extends Maybe<{ [key: string]: unknown }>, D>(
   errors: unknown[]
   extensions: { cacheControl?: CacheControl }
 }> => {
-  const { operationName, variables, query: maybeQuery } = options
-  const query = maybeQuery ?? persistedQueries.get(operationName)
+  try {
+    const { operationName, variables, query: maybeQuery } = options
+    const query = maybeQuery ?? persistedQueries.get(operationName)
 
-  if (query == null) {
-    throw new Error(`No query found for operationName: ${operationName}`)
-  }
+    if (query == null) {
+      throw new Error(`No query found for operationName: ${operationName}`)
+    }
 
-  const enveloped = await envelopPromise
-  const {
-    parse,
-    contextFactory,
-    execute: run,
-    schema,
-  } = enveloped(envelopContext)
+    const enveloped = await envelopPromise
+    const {
+      parse,
+      contextFactory,
+      execute: run,
+      schema,
+    } = enveloped(envelopContext)
 
-  const contextValue = await contextFactory(envelopContext)
+    const contextValue = await contextFactory(envelopContext)
 
-  const { data, errors } = (await run({
-    schema,
-    document: parse(query),
-    variableValues: variables,
-    contextValue,
-    operationName,
-  })) as { data: D; errors: unknown[] }
+    const result = await run({
+      schema,
+      document: parse(query),
+      variableValues: variables,
+      contextValue,
+      operationName,
+    })
 
-  return {
-    data,
-    errors,
-    extensions: { cacheControl: contextValue.cacheControl },
+    return {
+      data: result.data as D,
+      errors: [...(result.errors ?? [])],
+      extensions: { cacheControl: contextValue.cacheControl },
+    }
+  } catch (error) {
+    console.error('GraphQL execution error:', error)
+    throw error
   }
 }
