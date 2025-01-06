@@ -22,13 +22,14 @@ export default async function handler(
           'X-VTEX-API-AppToken': process.env.VTEX_APP_TOKEN as string,
         },
         body: JSON.stringify({
+          // Formato esperado por Vtex
           orderItems: [
             {
-              quantity: 1,
-              seller: '1',
-              id: '1',
-              index: 0,
-              price: 1099,
+              quantity: 1, // Cantidad de productos
+              seller: '1', // ID del seller
+              id: '1', // ID del producto
+              index: 0, // Product index
+              price: 1099, // Precio del producto
             },
           ],
         }),

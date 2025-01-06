@@ -34,11 +34,14 @@ module.exports = {
   },
 
   // Production URLs
-  storeUrl: 'https://ecommitmentpartnerar.myvtex.com',
-  secureSubdomain: 'https://ecommitmentpartnerar.myvtex.com',
-  checkoutUrl: 'https://ecommitmentpartnerar.myvtex.com/checkout',
-  loginUrl: 'https://ecommitmentpartnerar.myvtex.com/api/io/login',
-  accountUrl: 'https://ecommitmentpartnerar.myvtex.com/api/io/account',
+  storeUrl: 'https://gonzalojparra--ecommitmentpartnerar.myvtex.com',
+  secureSubdomain: 'https://gonzalojparra--ecommitmentpartnerar.myvtex.com',
+  checkoutUrl:
+    'https://gonzalojparra--ecommitmentpartnerar.myvtex.com/checkout',
+  loginUrl:
+    'https://gonzalojparra--ecommitmentpartnerar.myvtex.com/api/io/login',
+  accountUrl:
+    'https://gonzalojparra--ecommitmentpartnerar.myvtex.com/api/io/account',
 
   // Lighthouse CI
   lighthouse: {
